@@ -5,33 +5,33 @@ const ToneSelector = ({ selected, onSelect }) => {
     const tones = [
         {
             id: 'mild',
-            label: 'Mild Gen Z',
-            description: 'Casual but safe for work-ish.',
+            label: 'Mild',
+            description: 'Professional-ish',
             icon: Smile,
-            color: 'text-green-400',
+            bgColor: 'bg-neon-cyan',
         },
         {
             id: 'full',
-            label: 'Full Gen Z',
-            description: 'Slang, memes, no cap.',
+            label: 'Full Send',
+            description: 'No cap, fr fr',
             icon: Zap,
-            color: 'text-yellow-400',
+            bgColor: 'bg-neon-pink',
         },
         {
             id: 'unhinged',
             label: 'Unhinged',
-            description: 'Chaotic neutral. High risk.',
+            description: 'Chaos mode activated',
             icon: Flame,
-            color: 'text-red-500',
+            bgColor: 'bg-neon-lime',
         },
     ];
 
     return (
-        <div className="space-y-3 mt-6">
-            <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-2">
-                Pick your Vibe
+        <div className="space-y-4">
+            <label className="block font-black text-lg uppercase mb-2 transform -rotate-1 bg-black text-white inline-block px-2">
+                Pick your Vibe Check
             </label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {tones.map((tone) => {
                     const Icon = tone.icon;
                     const isSelected = selected === tone.id;
@@ -40,21 +40,27 @@ const ToneSelector = ({ selected, onSelect }) => {
                             key={tone.id}
                             onClick={() => onSelect(tone.id)}
                             className={`
-                relative p-4 rounded-xl border text-left transition-all duration-200
+                relative p-4 border-4 border-black transition-all duration-200 text-left group
                 ${isSelected
-                                    ? 'bg-neutral-800 border-indigo-500 ring-1 ring-indigo-500'
-                                    : 'bg-neutral-950 border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900'}
+                                    ? `${tone.bgColor} shadow-brutal translate-x-[-4px] translate-y-[-4px]`
+                                    : 'bg-white hover:bg-gray-50 hover:shadow-brutal-sm'}
               `}
                         >
-                            <div className="flex items-center gap-2 mb-1">
-                                <Icon className={`w-4 h-4 ${tone.color}`} />
-                                <span className={`font-medium ${isSelected ? 'text-white' : 'text-neutral-300'}`}>
+                            <div className="flex items-center gap-2 mb-2">
+                                <Icon className={`w-6 h-6 border-2 border-black rounded-full p-0.5 ${isSelected ? 'bg-white' : 'bg-transparent'}`} />
+                                <span className="font-black text-xl uppercase">
                                     {tone.label}
                                 </span>
                             </div>
-                            <p className="text-xs text-neutral-500 leading-relaxed">
+                            <p className="text-sm font-bold opacity-80 border-t-2 border-black pt-2 border-dashed">
                                 {tone.description}
                             </p>
+
+                            {isSelected && (
+                                <div className="absolute -top-3 -right-3 bg-black text-white text-xs font-bold px-2 py-1 transform rotate-12">
+                                    SELECTED
+                                </div>
+                            )}
                         </button>
                     );
                 })}

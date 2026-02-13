@@ -8,60 +8,62 @@ const EmailForm = ({ data, onChange }) => {
     };
 
     return (
-        <div className="space-y-4">
-            <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-1 flex items-center gap-1">
-                    <User className="w-3 h-3" /> Recipient Name
-                </label>
-                <input
-                    type="text"
-                    name="recipient"
-                    value={data.recipient}
-                    onChange={handleChange}
-                    placeholder="e.g. Elon Musk"
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-lg py-3 px-4 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-neutral-700"
-                />
+        <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+                <div className="relative group">
+                    <label className="block font-black text-lg uppercase mb-2 flex items-center gap-2">
+                        <User className="w-5 h-5" /> Who's it for?
+                    </label>
+                    <input
+                        type="text"
+                        name="recipient"
+                        value={data.recipient}
+                        onChange={handleChange}
+                        placeholder="Elon Musk"
+                        className="w-full bg-brutal-white border-4 border-black p-4 font-bold text-lg focus:outline-none focus:bg-neon-cyan focus:shadow-brutal transition-all placeholder:text-gray-500"
+                    />
+                </div>
+
+                <div className="relative group">
+                    <label className="block font-black text-lg uppercase mb-2 flex items-center gap-2">
+                        <Briefcase className="w-5 h-5" /> At which corp?
+                    </label>
+                    <input
+                        type="text"
+                        name="company"
+                        value={data.company}
+                        onChange={handleChange}
+                        placeholder="Twitter / X"
+                        className="w-full bg-brutal-white border-4 border-black p-4 font-bold text-lg focus:outline-none focus:bg-neon-pink focus:shadow-brutal transition-all placeholder:text-gray-500"
+                    />
+                </div>
             </div>
 
-            <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-1 flex items-center gap-1">
-                    <Briefcase className="w-3 h-3" /> Company
-                </label>
-                <input
-                    type="text"
-                    name="company"
-                    value={data.company}
-                    onChange={handleChange}
-                    placeholder="e.g. Twitter / X"
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-lg py-3 px-4 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-neutral-700"
-                />
-            </div>
-
-            <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-1 flex items-center gap-1">
-                    <Box className="w-3 h-3" /> What are you offering?
+            <div className="relative group">
+                <label className="block font-black text-lg uppercase mb-2 flex items-center gap-2">
+                    <Box className="w-5 h-5" /> What u selling?
                 </label>
                 <input
                     type="text"
                     name="product"
                     value={data.product}
                     onChange={handleChange}
-                    placeholder="e.g. AI-powered toaster"
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-lg py-3 px-4 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-neutral-700"
+                    placeholder="Quantum-powered toaster"
+                    className="w-full bg-brutal-white border-4 border-black p-4 font-bold text-lg focus:outline-none focus:bg-neon-lime focus:shadow-brutal transition-all placeholder:text-gray-500"
                 />
             </div>
 
-            <div>
-                <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-1 flex items-center gap-1">
-                    <Target className="w-3 h-3" /> Goal
+            <div className="relative group">
+                <label className="block font-black text-lg uppercase mb-2 flex items-center gap-2">
+                    <Target className="w-5 h-5" /> The endgame?
                 </label>
                 <input
                     type="text"
                     name="goal"
                     value={data.goal}
                     onChange={handleChange}
-                    placeholder="e.g. Get a demo call"
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-lg py-3 px-4 text-neutral-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-neutral-700"
+                    placeholder="Get a demo call (or just a reply)"
+                    className="w-full bg-brutal-white border-4 border-black p-4 font-bold text-lg focus:outline-none focus:bg-neon-purple focus:text-white focus:shadow-brutal transition-all placeholder:text-gray-500"
                 />
             </div>
         </div>

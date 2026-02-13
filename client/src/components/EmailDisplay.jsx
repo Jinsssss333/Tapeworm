@@ -12,52 +12,60 @@ const EmailDisplay = ({ email, onRegenerate }) => {
     };
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="bg-neutral-950 border-b border-neutral-800 p-4 flex items-center justify-between">
-                    <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
-                    </div>
-                    <div className="text-xs font-mono text-neutral-500">
-                        composed_email.txt
+        <div className="transform rotate-1 animate-in slide-in-from-bottom-8 duration-500">
+            <div className="bg-white border-4 border-black shadow-brutal-lg">
+                {/* Window Handle */}
+                <div className="bg-neon-purple border-b-4 border-black p-3 flex items-center justify-between">
+                    <h3 className="font-black text-white uppercase tracking-wider flex items-center gap-2">
+                        <span className="bg-white text-black px-1 text-sm border-2 border-black">TXT</span>
+                        generated_rizz.txt
+                    </h3>
+                    <div className="flex gap-1.5">
+                        <div className="w-4 h-4 bg-white border-2 border-black hover:bg-gray-200 cursor-pointer"></div>
+                        <div className="w-4 h-4 bg-white border-2 border-black hover:bg-gray-200 cursor-pointer"></div>
                     </div>
                 </div>
 
-                <div className="p-6 space-y-4">
-                    <div>
-                        <span className="text-neutral-500 text-sm font-mono mr-2">Subject:</span>
-                        <span className="text-neutral-200 font-medium">{email.subject}</span>
+                <div className="p-6 md:p-8 space-y-6 relative">
+
+                    <div className="bg-brutal-white border-2 border-black p-4 relative">
+                        <span className="absolute -top-3 left-4 bg-black text-white px-2 text-xs font-bold uppercase">Subject</span>
+                        <span className="font-display text-xl md:text-2xl text-black leading-tight block mt-2">
+                            {email.subject}
+                        </span>
                     </div>
-                    <div className="h-px bg-neutral-800 w-full"></div>
-                    <div className="text-neutral-300 whitespace-pre-wrap leading-relaxed font-sans">
+
+                    <div className="font-sans text-lg whitespace-pre-wrap leading-relaxed border-l-4 border-neon-pink pl-4">
                         {email.body}
                     </div>
+
                 </div>
 
-                <div className="bg-neutral-950 border-t border-neutral-800 p-4 flex gap-3">
+                <div className="border-t-4 border-black p-4 bg-gray-50 flex gap-4 flex-col md:flex-row">
                     <button
                         onClick={handleCopy}
-                        className="flex-1 bg-white text-black font-semibold py-2 px-4 rounded-lg hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2"
+                        className={`
+              flex-1 border-4 border-black font-black py-3 px-6 text-lg transition-all flex items-center justify-center gap-3 shadow-brutal-sm hover:shadow-brutal hover:-translate-y-1
+              ${copied ? 'bg-green-400' : 'bg-neon-cyan'}
+            `}
                     >
                         {copied ? (
                             <>
-                                <Check className="w-4 h-4" /> Copied!
+                                <Check className="w-6 h-6" /> COPIED!
                             </>
                         ) : (
                             <>
-                                <Copy className="w-4 h-4" /> Copy to Clipboard
+                                <Copy className="w-6 h-6" /> COPY THIS
                             </>
                         )}
                     </button>
 
                     <button
                         onClick={onRegenerate}
-                        className="px-4 py-2 bg-neutral-800 text-neutral-400 hover:text-white rounded-lg transition-colors border border-black hover:border-neutral-700 hover:bg-neutral-700"
+                        className="px-6 py-3 bg-white border-4 border-black font-bold hover:bg-gray-100 shadow-brutal-sm hover:shadow-brutal hover:-translate-y-1 transition-all"
                         title="Regenerate"
                     >
-                        <RotateCcw className="w-5 h-5" />
+                        <RotateCcw className="w-6 h-6" />
                     </button>
                 </div>
             </div>
