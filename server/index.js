@@ -11,12 +11,16 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Gemini
+console.log("Initializing Gemini with API Key present:", !!process.env.GEMINI_API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const generateEmail = async (data) => {
   const { recipient, company, product, goal, tone } = data;
+  console.log("Received generation request for:", { recipient, company, tone });
 
-  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  // ... rest of the function
+
 
   let prompt = `Write a cold email to ${recipient} at ${company} about ${product}. The goal is ${goal}. `;
 
@@ -36,16 +40,16 @@ const generateEmail = async (data) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    
+
     // Attempt to parse JSON. If it fails, return raw text in body.
     try {
-        // Clean up markdown code blocks if present
-        const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
-        return JSON.parse(cleanedText);
+      // Clean up markdown code blocks if present
+      const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      return JSON.parse(cleanedText);
     } catch (e) {
-        console.error("Failed to parse JSON from AI response:", text);
-         // Fallback: try to extract subject and body manually if possible, or just return text
-         return { subject: "Cold Email", body: text };
+      console.error("Failed to parse JSON from AI response:", text);
+      // Fallback: try to extract subject and body manually if possible, or just return text
+      return { subject: "Cold Email", body: text };
     }
 
   } catch (error) {
@@ -59,7 +63,12 @@ app.post('/generate-email', async (req, res) => {
     const emailData = await generateEmail(req.body);
     res.json(emailData);
   } catch (error) {
-    res.status(500).json({ error: "Failed to generate email" });
+    console.error("Route Handler Error:", error);
+    res.status(500).json({
+      error: "Failed to generate email",
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 

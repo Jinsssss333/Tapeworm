@@ -19,6 +19,7 @@ function App() {
     setLoading(true)
     setGeneratedEmail(null)
     try {
+      console.log("Sending request to backend...");
       const response = await fetch('http://localhost:3000/generate-email', {
         method: 'POST',
         headers: {
@@ -26,11 +27,17 @@ function App() {
         },
         body: JSON.stringify({ ...emailData, tone }),
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json()
+      console.log("Received data:", data);
       setGeneratedEmail(data)
     } catch (error) {
       console.error("Error generating email:", error)
-      alert("Failed to generate email. Check backend.")
+      alert(`Failed to generate email. Error: ${error.message}`)
     } finally {
       setLoading(false)
     }
