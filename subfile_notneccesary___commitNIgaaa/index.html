@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartMail View - AI Email Wrapper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="mail"></i>
+                <span>SmartMail</span>
+            </div>
+            <nav>
+                <button class="nav-item active"><i data-lucide="inbox"></i> Inbox</button>
+                <button class="nav-item"><i data-lucide="star"></i> Starred</button>
+                <button class="nav-item"><i data-lucide="send"></i> Sent</button>
+                <button class="nav-item"><i data-lucide="archive"></i> Archive</button>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">JS</div>
+                <div class="user-info">
+                    <span class="name">Jane Smith</span>
+                    <span class="email">jane@example.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search emails...">
+                </div>
+                <div class="actions">
+                    <button class="icon-btn"><i data-lucide="bell"></i></button>
+                    <button class="icon-btn"><i data-lucide="settings"></i></button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Input Section -->
+                <section id="input-section" class="card input-card">
+                    <div class="card-header">
+                        <h2>Analyze New Email</h2>
+                        <p>Paste your email below to get AI-powered insights.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-subject">Subject</label>
+                        <input type="text" id="email-subject" placeholder="e.g., Project Update Meeting">
+                    </div>
+                    <div class="form-group">
+                        <label for="email-sender">Sender</label>
+                        <input type="text" id="email-sender" placeholder="e.g., John Doe <john@company.com>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email-body">Email Body</label>
+                        <textarea id="email-body" rows="8" placeholder="Paste the email content here..."></textarea>
+                    </div>
+                    <div class="card-footer">
+                        <button id="analyze-btn" class="btn primary-btn">
+                            <i data-lucide="sparkles"></i> Analyze with AI
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Results Section (Hidden initially) -->
+                <section id="results-section" class="results-grid hidden">
+                    
+                    <!-- Left Column: Augmented View -->
+                    <div class="col-left">
+                        <div class="card email-view-card">
+                            <div class="email-header">
+                                <div class="sender-avatar" id="display-avatar">JD</div>
+                                <div class="email-meta">
+                                    <h2 id="display-subject">Subject Line</h2>
+                                    <span class="sender-info" id="display-sender">Sender Name</span>
+                                    <span class="email-date">Just now</span>
+                                </div>
+                                <div class="email-actions">
+                                    <button class="icon-btn"><i data-lucide="reply"></i></button>
+                                    <button class="icon-btn"><i data-lucide="trash-2"></i></button>
+                                </div>
+                            </div>
+                            <div class="email-body" id="display-body">
+                                <!-- Original content goes here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: AI Insights -->
+                    <div class="col-right">
+                        
+                        <!-- AI Summary -->
+                        <div class="card insights-card">
+                            <div class="card-header-small">
+                                <i data-lucide="bot" class="ai-icon"></i>
+                                <h3>AI Summary</h3>
+                            </div>
+                            <div class="insight-content" id="ai-summary">
+                                <div class="skeleton-line"></div>
+                                <div class="skeleton-line"></div>
+                                <div class="skeleton-line short"></div>
+                            </div>
+                        </div>
+
+                        <!-- Sentiment & Priority -->
+                        <div class="card stats-card">
+                            <div class="stat-item">
+                                <span class="label">Sentiment</span>
+                                <span class="value" id="ai-sentiment">--</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Priority</span>
+                                <span class="value" id="ai-priority">--</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Items -->
+                        <div class="card action-items-card">
+                            <div class="card-header-small">
+                                <i data-lucide="check-square" class="accent-icon"></i>
+                                <h3>Action Items</h3>
+                            </div>
+                            <ul class="action-list" id="ai-actions">
+                                <!-- Actions will be injected here -->
+                            </ul>
+                        </div>
+
+                        <!-- Quick Reply -->
+                        <div class="card reply-card">
+                            <div class="card-header-small">
+                                <i data-lucide="pen-tool" class="accent-icon"></i>
+                                <h3>Draft Reply</h3>
+                            </div>
+                            <textarea id="ai-reply" readonly class="reply-preview"></textarea>
+                            <button class="btn secondary-btn full-width">Copy to Clipboard</button>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
